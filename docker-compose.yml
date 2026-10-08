@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: league_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports: ["5432:5432"]
+    volumes: [league_pg:/var/lib/postgresql/data]
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: league_db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      JWT_SECRET: change-me-in-production
+      PORT: 3000
+    ports: ["3000:3000"]
+    depends_on: [postgres]
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:3000/api
+    ports: ["5173:5173"]
+    depends_on: [backend]
+volumes:
+  league_pg:

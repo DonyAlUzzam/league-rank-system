@@ -1,0 +1,1 @@
+{"name":"league-ranking-system","private":true,"scripts":{"install:all":"npm --prefix backend install && npm --prefix frontend install","dev":"concurrently \"npm --prefix backend run start:dev\" \"npm --prefix frontend run dev\""},"devDependencies":{"concurrently":"^9.2.1"}}
