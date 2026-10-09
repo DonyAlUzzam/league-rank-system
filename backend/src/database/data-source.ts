@@ -1,5 +1,5 @@
-import 'reflect-metadata';
-import { DataSource } from 'typeorm';
+import "reflect-metadata";
+import { DataSource } from "typeorm";
 
 import {
   League,
@@ -10,17 +10,20 @@ import {
   PlayerMatchStatistic,
   User,
   AuditLog,
-} from './entities';
+} from "./entities";
 
 export default new DataSource({
-  type: 'postgres',
+  type: "postgres",
 
-  host: process.env.DATABASE_HOST || 'localhost',
+  host: process.env.DATABASE_HOST || "localhost",
   port: +(process.env.DATABASE_PORT || 5432),
 
-  username: process.env.DATABASE_USER || 'dony',
-  password: process.env.DATABASE_PASSWORD || 'postgres',
-  database: process.env.DATABASE_NAME || 'league_db',
+  username: process.env.DATABASE_USER || "dony",
+  password: process.env.DATABASE_PASSWORD || "postgres",
+  database: process.env.DATABASE_NAME || "league_db",
+  ssl: {
+    rejectUnauthorized: true,
+  },
 
   entities: [
     League,
@@ -33,5 +36,5 @@ export default new DataSource({
     AuditLog,
   ],
 
-  migrations: [__dirname + '/migrations/*.{js,ts}'],
+  migrations: [__dirname + "/migrations/*.{js,ts}"],
 });
